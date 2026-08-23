@@ -1,3 +1,5 @@
+https://lquaresma97.github.io/gestao-cargas/
+
 # 📦 Sistema de Gestão de Cargas e Validação Logística
 
 > **Projeto prático desenvolvido para automatizar e validar o fluxo de informações logísticas antes da emissão de documentos fiscais (CT-e / Minutas).**
