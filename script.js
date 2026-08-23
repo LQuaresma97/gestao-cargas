@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 const usuarioLogado = sessionStorage.getItem("usuarioLogado");
 if (!usuarioLogado) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 // ---------------------------------------------------------------------------
@@ -33,7 +33,7 @@ const logoutButton = document.getElementById('logoutButton');
 loggedUserLabel.textContent = usuarioLogado;
 logoutButton.addEventListener('click', function () {
     sessionStorage.removeItem("usuarioLogado");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 });
 
 // Filtro de busca na tabela
