@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Cargas e Documentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="user-info">
+                <span id="loggedUserLabel"></span>
+                <button type="button" id="logoutButton">Sair</button>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-icon">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 4L44 14V34L24 44L4 34V14L24 4Z" stroke="#f2600c" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M4 14L24 24L44 14" stroke="#f2600c" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M24 24V44" stroke="#f2600c" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M14 9L34 19" stroke="#f2600c" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h1>Sistema de Gestão de Cargas</h1>
+            <p>Validação e emissão de minutas operacionais</p>
+            <div class="hazard-stripe"></div>
+        </header>
+
+        <section class="menu-bar">
+            <input type="text" id="searchInput" placeholder="Buscar por NF ou OS...">
+        </section>
+
+        <section class="form-section">
+            <h2>Cadastrar Nova Carga (CTRC)</h2>
+            <form id="cargaForm">
+                <div class="input-group">
+                    <label for="serviceOrderNumber">Número da OS:</label>
+                    <input type="text" id="serviceOrderNumber" placeholder="Ex: OS-4521" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="invoiceNumber">Número da NF:</label>
+                    <input type="text" id="invoiceNumber" placeholder="Ex: 987654" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="payer">Pagador do Frete:</label>
+                    <select id="payer" required>
+                        <option value="">Selecione...</option>
+                        <option value="Remetente (CIF)">Remetente (CIF)</option>
+                        <option value="Destinatário (FOB)">Destinatário (FOB)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="productDescription">Descrição da Mercadoria:</label>
+                    <input type="text" id="productDescription" placeholder="Ex: Eletrônicos, Peças" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="transportMode">Modal de Transporte:</label>
+                    <select id="transportMode" required>
+                        <option value="">Selecione...</option>
+                        <option value="Rodoviário">Rodoviário</option>
+                        <option value="Aéreo">Aéreo</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="weight">Peso (kg):</label>
+                    <input type="number" id="weight" step="0.1" placeholder="Ex: 150.5" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="destination">Destino (Cidade/UF):</label>
+                    <input type="text" id="destination" placeholder="Ex: Guarulhos - SP" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hasQuote">Tem cotação para esta NF?</label>
+                    <select id="hasQuote" required>
+                        <option value="">Selecione...</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+
+                <!-- Só aparece quando há cotação -->
+                <div class="input-group" id="quoteNumberGroup" style="display: none;">
+                    <label for="quoteNumber">Número da Cotação:</label>
+                    <input type="text" id="quoteNumber" placeholder="Ex: COT-99882">
+                </div>
+
+                <!-- Mostra a tabela sugerida quando não há cotação -->
+                <div class="input-group" id="priceTableGroup" style="display: none;">
+                    <label for="priceTablePreview">Regra de Precificação:</label>
+                    <input type="text" id="priceTablePreview" readonly>
+                </div>
+
+                <button type="submit">Validar e Liberar Minuta</button>
+            </form>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </section>
+
+        <section class="table-section">
+            <h2>Cargas Liberadas</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>OS</th>
+                            <th>NF</th>
+                            <th>CT-e</th>
+                            <th>Descrição</th>
+                            <th>Pagador</th>
+                            <th>Precificação</th>
+                            <th>Ref.</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaCargas">
+                        <!-- Linhas dinâmicas -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Gestão de Cargas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container login-container">
+        <header>
+            <div class="header-icon">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="22" width="28" height="20" rx="3" stroke="#f2600c" stroke-width="2.5"/>
+                    <path d="M16 22V15C16 9.5 20 6 24 6C28 6 32 9.5 32 15V22" stroke="#f2600c" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="24" cy="31" r="3" fill="#f2600c"/>
+                    <path d="M24 34V38" stroke="#f2600c" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h1>Acesso ao Sistema</h1>
+            <p>Entre com suas credenciais</p>
+            <div class="hazard-stripe"></div>
+        </header>
+
+        <section class="form-section">
+            <form id="loginForm">
+                <div class="input-group full-width">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" placeholder="Ex: usuario@empresa.com" required>
+                </div>
+
+                <div class="input-group full-width">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </section>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
