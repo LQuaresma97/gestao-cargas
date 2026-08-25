@@ -38,36 +38,43 @@ logoutButton.addEventListener('click', function () {
 // ---------------------------------------------------------------------------
 // FILTRO DE BUSCA (OS / NF)
 // ---------------------------------------------------------------------------
-const searchButton = document.getElementById('searchButton');
+const searchButton = document.getElementById('searchButton'); // Deixe apenas o botão sendo criado aqui
 
 function aplicarFiltro() {
     const termo = searchInput.value.toLowerCase();
+    
+    // O filter() vai olhar tanto para a OS quanto para a NF
     const cargasFiltradas = cargas.filter((carga) => {
         return (
             carga.numeroOS.toLowerCase().includes(termo) ||
             carga.nf.toLowerCase().includes(termo)
         );
     });
+    
     renderizarTabela(cargasFiltradas);
 }
 
-// Ativa a busca ao clicar na lupa
-searchButton.addEventListener('click', aplicarFiltro);
+// 1. Aciona a busca ao clicar na Lupa
+if (searchButton) {
+    searchButton.addEventListener('click', aplicarFiltro);
+}
 
-// Ativa a busca ao apertar a tecla "Enter" dentro do campo de texto
-searchInput.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        aplicarFiltro();
-    }
-});
+// 2. Aciona a busca ao apertar Enter
+if (searchInput) {
+    searchInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            aplicarFiltro();
+        }
+    });
 
-// Volta a mostrar todas as cargas automaticamente se o operador apagar o texto
-searchInput.addEventListener('input', function () {
-    if (this.value === '') {
-        renderizarTabela(cargas);
-    }
-});
+    // 3. Se o operador apagar o texto, a tabela volta a mostrar tudo
+    searchInput.addEventListener('input', function () {
+        if (this.value === '') {
+            renderizarTabela(cargas);
+        }
+    });
+}
 
 // ---------------------------------------------------------------------------
 // CONTROLE DE INTERFACE: PRECIFICAÇÃO
