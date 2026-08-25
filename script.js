@@ -38,6 +38,8 @@ logoutButton.addEventListener('click', function () {
 // ---------------------------------------------------------------------------
 // FILTRO DE BUSCA (OS / NF)
 // ---------------------------------------------------------------------------
+const searchButton = document.getElementById('searchButton');
+
 function aplicarFiltro() {
     const termo = searchInput.value.toLowerCase();
     const cargasFiltradas = cargas.filter((carga) => {
@@ -48,7 +50,24 @@ function aplicarFiltro() {
     });
     renderizarTabela(cargasFiltradas);
 }
-searchInput.addEventListener('input', aplicarFiltro);
+
+// Ativa a busca ao clicar na lupa
+searchButton.addEventListener('click', aplicarFiltro);
+
+// Ativa a busca ao apertar a tecla "Enter" dentro do campo de texto
+searchInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        aplicarFiltro();
+    }
+});
+
+// Volta a mostrar todas as cargas automaticamente se o operador apagar o texto
+searchInput.addEventListener('input', function () {
+    if (this.value === '') {
+        renderizarTabela(cargas);
+    }
+});
 
 // ---------------------------------------------------------------------------
 // CONTROLE DE INTERFACE: PRECIFICAÇÃO
