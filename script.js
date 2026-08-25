@@ -52,6 +52,9 @@ function aplicarFiltro() {
     });
     
     renderizarTabela(cargasFiltradas);
+
+    // Faz a tela rolar suavemente até a tabela de resultados
+    document.querySelector('.table-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // 1. Aciona a busca ao clicar na Lupa
@@ -111,7 +114,7 @@ form.addEventListener('submit', function (event) {
     let precificacao = temCotacao ? "Cotação" : "Tabela";
     let refPreco = temCotacao ? quoteNumberInput.value : priceTablePreview.value;
 
-    // Regras de Negócio
+    // Regras de Negócio & Validações
     if (peso <= 0) {
         exibirErro("Erro: O peso da carga deve ser maior que zero.");
         return;
@@ -122,12 +125,17 @@ form.addEventListener('submit', function (event) {
         return;
     }
 
-    const nfDuplicada = cargas.some(
-        (carga) => carga.numeroOS === numeroOS && carga.nf === nf
-    );
-    
+    // TRAVA 1: Impede que a mesma OS seja usada novamente
+    const osDuplicada = cargas.some((carga) => carga.numeroOS === numeroOS);
+    if (osDuplicada) {
+        exibirErro(`Erro: A OS ${numeroOS} já está vinculada a outra carga no sistema.`);
+        return;
+    }
+
+    // TRAVA 2: Impede que a mesma Nota Fiscal seja lançada novamente
+    const nfDuplicada = cargas.some((carga) => carga.nf === nf);
     if (nfDuplicada) {
-        exibirErro(`Erro: A NF ${nf} já foi lançada para a OS ${numeroOS}.`);
+        exibirErro(`Erro: A Nota Fiscal ${nf} já foi cadastrada no sistema.`);
         return;
     }
 
@@ -156,11 +164,6 @@ form.addEventListener('submit', function (event) {
     priceTableGroup.style.display = "none";
     document.getElementById('invoiceNumber').focus();
 });
-
-function exibirErro(mensagem) {
-    errorMessage.textContent = mensagem;
-    errorMessage.style.display = "block";
-}
 
 // ---------------------------------------------------------------------------
 // RENDERIZAÇÃO DA TABELA
