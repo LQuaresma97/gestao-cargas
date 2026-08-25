@@ -299,3 +299,41 @@ th {
 .os-card-header strong {
     color: var(--text-primary);
 }
+
+/* --- Estilos do Olho da Senha --- */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px; /* Deixa um espaço para o texto não passar por baixo do olho */
+}
+
+.eye-btn {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: unset; 
+}
+
+.eye-btn:hover {
+    background: transparent;
+    color: var(--accent-orange);
+}
+
+.eye-btn svg {
+    width: 20px;
+    height: 20px;
+}
