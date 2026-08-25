@@ -37,7 +37,6 @@ form.addEventListener('submit', function (event) {
 
 
 // --- INÍCIO DA FUNÇÃO DO OLHO DA SENHA ---
-// (Agora está no lugar certo, totalmente independente do login)
 const togglePassword = document.getElementById('togglePassword');
 const senhaInput = document.getElementById('senha');
 
