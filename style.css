@@ -105,19 +105,47 @@ header p {
     margin-bottom: 25px;
 }
 
-.menu-bar #searchInput {
-    width: 100%;
+.search-container {
+    display: flex;
+    align-items: stretch;
+}
+
+.search-container #searchInput {
+    flex-grow: 1;
     padding: 10px;
     background-color: var(--bg-input);
     color: var(--text-primary);
     border: 1px solid var(--border-subtle);
-    border-radius: 4px;
+    border-radius: 4px 0 0 4px; /* Arredonda só o lado esquerdo */
     font-size: 0.95rem;
 }
 
-.menu-bar #searchInput:focus {
+.search-container #searchInput:focus {
     outline: none;
     border-color: var(--accent-orange);
+}
+
+.search-container #searchButton {
+    grid-column: unset;
+    width: auto;
+    padding: 0 15px;
+    background-color: var(--accent-orange);
+    color: #ffffff;
+    border: none;
+    border-radius: 0 4px 4px 0; /* Arredonda só o lado direito */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container #searchButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+.search-container #searchButton:hover {
+    background-color: var(--accent-orange-hover);
 }
 
 .user-info {
